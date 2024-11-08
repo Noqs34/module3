@@ -1,19 +1,21 @@
-y = '.com', '.ru', '.net', '@'
+suffix = '.com', '.ru', '.net'
 def send_email(message, recipient, sender = "university.help@gmail.com"):
-    for i in range(1):
-        if sender == recipient:
-            print('Нельзя отправить письмо самому себе!')
-            break
-        for j in range(len(y)):
-            if recipient.__contains__(y[j]) or sender.__contains__(y[j]):
-                if sender != "university.help@gmail.com":
-                    print('НЕСТАНДАРТНЫЙ ОТПРАВИТЕЛЬ! Письмо отправлено с адреса ', sender, 'на адрес ', recipient)
-                    break
-                print('Письмо успешно отправлено с адреса ', sender, 'на адрес ', recipient)
-                break
-            else:
-                print('Невозможно отправить письмо с адреса ', sender, 'на адрес ', recipient)
-                break
+    if '@'  in recipient:
+        if '@' in sender:
+            if recipient.endswith(suffix):
+                if sender.endswith(suffix):
+                    if sender == recipient:
+                        print('Нельзя отправить письмо самому себе!')
+                    elif sender != "university.help@gmail.com":
+                        print('НЕСТАНДАРТНЫЙ ОТПРАВИТЕЛЬ! Письмо отправлено с адреса ', sender, 'на адрес ', recipient)
+                    elif sender != recipient and sender == "university.help@gmail.com":
+                        print('Письмо успешно отправлено с адреса ', sender, 'на адрес ', recipient)
+                else:
+                    print('Невозможно отправить письмо с адреса ', sender, 'на адрес ', recipient)
+        else:
+            print('Невозможно отправить письмо с адреса ', sender, 'на адрес ', recipient)
+    else:
+        print('Невозможно отправить письмо с адреса ', sender, 'на адрес ', recipient)
 send_email('Это сообщение для проверки связи', 'vasyok1337@gmail.com')
 send_email('Вы видите это сообщение как лучший студент курса!', 'urban.fan@mail.ru', sender='urban.info@gmail.com')
 send_email('Пожалуйста, исправьте задание', 'urban.student@mail.ru', sender='urban.teacher@mail.uk')
